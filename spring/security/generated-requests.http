@@ -1,0 +1,14 @@
+###
+GET localhost:8080/api/orders
+
+###
+GET localhost:8080/api/orders
+Authorization: Basic user1 user1
+
+###
+GET localhost:8080/admin/api/orders
+Authorization: Basic admin2 admin2
+
+###
+POST localhost:8080/admin/api/orders
+Authorization: Basic admin2 admin2
