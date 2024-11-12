@@ -23,7 +23,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/public/**").permitAll()
-                        .requestMatchers("/admin/api/**").hasRole("ADMIN") // Restricted to ADMIN role
+                        .requestMatchers("/admin/api/**").hasRole("ADMIN")
                         .requestMatchers("/api/**").hasRole("USER")
                         .anyRequest().authenticated()
                 )
@@ -36,18 +36,17 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService() {
         var user1 = User.withUsername("user1")
                 .password("{noop}user1")
-                .roles("USER")
+                .roles("USER") // equals to authority ROLE_USER
                 .build();
 
         var admin1 = User.withUsername("admin1")
                 .password("{noop}admin1")
-                .roles("ADMIN")
+                .roles("ADMIN") // equals to authority ROLE_ADMIN
                 .build();
 
         var admin2 = User.withUsername("admin2")
                 .password("{noop}admin2")
-                .roles("ADMIN")
-//                .authorities("CREATE_ORDER")
+                .authorities("ROLE_ADMIN", "CREATE_ORDER")
                 .build();
 
         return new InMemoryUserDetailsManager(user1, admin1, admin2);
