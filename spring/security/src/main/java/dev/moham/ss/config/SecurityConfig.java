@@ -34,6 +34,7 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
+//        https://stackoverflow.com/questions/19525380/difference-between-role-and-grantedauthority-in-spring-security
         var user1 = User.withUsername("user1")
                 .password("{noop}user1")
                 .roles("USER") // equals to authority ROLE_USER
