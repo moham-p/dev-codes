@@ -1,25 +1,22 @@
 package dev.moham.th.order;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class OrderService {
 
     private final OrderRepository orderRepository;
 
-    public OrderResponse saveOrder(OrderDTO request) {
-        Order order = new Order();
-        order.setName(request.getName());
-        order.setDescription(request.getDescription());
-        Order savedOrder = orderRepository.save(order);
+    public List<Order> findAll() {
+        log.info("OrderService HashCode: {}", System.identityHashCode(this));
+        log.info("OrderRepository HashCode: {}", System.identityHashCode(orderRepository));
 
-        OrderResponse response = new OrderResponse();
-        response.setId(savedOrder.getId());
-        response.setName(savedOrder.getName());
-        response.setDescription(savedOrder.getDescription());
-        return response;
+        return orderRepository.findAll();
     }
-    // Other business methods
 }
