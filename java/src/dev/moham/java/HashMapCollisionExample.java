@@ -16,7 +16,7 @@ public class HashMapCollisionExample {
 }
 
 class KeyWithSameHash {
-    private String key;
+    private final String key;
 
     public KeyWithSameHash(String key) {
         this.key = key;
