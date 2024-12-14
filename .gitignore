@@ -1,4 +1,6 @@
-/java/java.iml
-/database/trans/target/
-/spring/security/target/
-/.idea/
+# IntelliJ IDEA project files
+.idea/
+*.iml
+
+# Target directories (for Maven/Gradle builds)
+target/
