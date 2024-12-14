@@ -1,2 +1,4 @@
 /java/java.iml
-.idea
+/database/trans/target/
+/spring/security/target/
+/.idea/
