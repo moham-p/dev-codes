@@ -1,20 +1,19 @@
 package dev.moham.trans;
 
-import dev.moham.trans.DemoEntity;
-import dev.moham.trans.DemoRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
+@AllArgsConstructor
 public class DemoService {
+
     private final DemoRepository demoRepository;
 
-    public DemoService(DemoRepository demoRepository) {
-        this.demoRepository = demoRepository;
-    }
-
     @Transactional
-    public void transferBalance(Long fromId, Long toId, int amount) {
+    public void transferBalance(Long fromId, Long toId, int amount, boolean throwException) {
         DemoEntity from = demoRepository.findById(fromId).orElseThrow();
         DemoEntity to = demoRepository.findById(toId).orElseThrow();
 
@@ -27,5 +26,12 @@ public class DemoService {
 
         demoRepository.save(from);
         demoRepository.save(to);
+
+        if (throwException)
+            throw new RuntimeException("This is a test exception");
+    }
+
+    public List<DemoEntity> getAllAccounts() {
+        return demoRepository.findAll();
     }
 }

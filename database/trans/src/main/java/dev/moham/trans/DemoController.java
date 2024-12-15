@@ -1,25 +1,26 @@
 package dev.moham.trans;
 
-import dev.moham.trans.DemoService;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
+@AllArgsConstructor
 public class DemoController {
-	private final DemoService demoService;
+    private final DemoService demoService;
 
-	public DemoController(DemoService demoService) {
-		this.demoService = demoService;
-	}
+    @PostMapping("/transfer")
+    public String transferBalance(@RequestParam Long fromId, @RequestParam Long toId, @RequestParam int amount, @RequestParam boolean throwException) {
+        demoService.transferBalance(fromId, toId, amount, throwException);
+        return "Transfer successful";
+    }
 
-	@PostMapping("/transfer")
-	public String transferBalance(@RequestParam Long fromId, @RequestParam Long toId, @RequestParam int amount) {
-		try {
-			demoService.transferBalance(fromId, toId, amount);
-			return "Transfer successful";
-		} catch (Exception e) {
-			return "Transfer failed: " + e.getMessage();
-		}
-	}
+    @GetMapping("/accounts")
+    public List<DemoEntity> getAllAccounts() {
+        return demoService.getAllAccounts();
+    }
 }

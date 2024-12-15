@@ -1,0 +1,10 @@
+###
+GET localhost:8080/accounts
+
+###
+### Test Transfer Request
+POST http://localhost:8080/transfer
+Content-Type: application/x-www-form-urlencoded
+
+fromId=1&toId=2&amount=10&throwException=false
+
