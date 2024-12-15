@@ -10,17 +10,18 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-public class DemoController {
-    private final DemoService demoService;
+public class AccountController {
+
+    private final AccountService accountService;
 
     @PostMapping("/transfer")
     public String transferBalance(@RequestParam Long fromId, @RequestParam Long toId, @RequestParam int amount, @RequestParam boolean throwException) {
-        demoService.transferBalance(fromId, toId, amount, throwException);
+        accountService.transferBalance(fromId, toId, amount, throwException);
         return "Transfer successful";
     }
 
     @GetMapping("/accounts")
-    public List<DemoEntity> getAllAccounts() {
-        return demoService.getAllAccounts();
+    public List<AccountEntity> getAllAccounts() {
+        return accountService.getAllAccounts();
     }
 }

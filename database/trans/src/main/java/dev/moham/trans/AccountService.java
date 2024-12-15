@@ -8,14 +8,14 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class DemoService {
+public class AccountService {
 
-    private final DemoRepository demoRepository;
+    private final AccountRepository accountRepository;
 
     @Transactional
     public void transferBalance(Long fromId, Long toId, int amount, boolean throwException) {
-        DemoEntity from = demoRepository.findById(fromId).orElseThrow();
-        DemoEntity to = demoRepository.findById(toId).orElseThrow();
+        AccountEntity from = accountRepository.findById(fromId).orElseThrow();
+        AccountEntity to = accountRepository.findById(toId).orElseThrow();
 
         if (from.getBalance() < amount) {
             throw new IllegalArgumentException("Insufficient funds");
@@ -24,14 +24,14 @@ public class DemoService {
         from.setBalance(from.getBalance() - amount);
         to.setBalance(to.getBalance() + amount);
 
-        demoRepository.save(from);
-        demoRepository.save(to);
+        accountRepository.save(from);
+        accountRepository.save(to);
 
         if (throwException)
             throw new RuntimeException("This is a test exception");
     }
 
-    public List<DemoEntity> getAllAccounts() {
-        return demoRepository.findAll();
+    public List<AccountEntity> getAllAccounts() {
+        return accountRepository.findAll();
     }
 }
